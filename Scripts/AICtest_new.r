@@ -1,4 +1,5 @@
 # Simplified iterative AIC test to find best ARIMA for selected time series
+# Combined to base_script.r
 
 laskuM <- function(aikasarja) {
 

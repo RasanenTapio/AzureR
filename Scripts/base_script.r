@@ -12,29 +12,38 @@ aineisto <- data.frame(pvm=test_aineisto[,1], production = test_aineisto[,2],
 	logproduction=log(test_aineisto[,2]), logdiff=c(NA,diff(log(test_aineisto[,2]))))
 plot(aineisto[,4], type='l')
 
-# input timeseries should look like this:
+# input time series should look like this:
 procution_ts <- ts(aineisto[,4],freq=12, start=c(1920,2))
 plot(procution_ts)
 
 # Data frame
 #aineisto <- data.frame(dataset1);
 
-# ARIMA-models and their BIC - loop over k = 1 to 5 and j = 1 to 5 (test)
-bestmodel <- laskuM(procution_ts)
+# ARIMA-models and their BIC - loop over i = 1 to 5 and j = 1 to 5 (test)
+tulosmatriisi <- matrix(Inf, nrow = 6, ncol = 6, dimnames = list(c(0:5),c(0:5)))
+bestmodel1 <- NA; bestmodel2 <- NA; bestmodel3 <- NA
 
-# testing: check results:
-max(bestmodel)
+for(i in 0:5) {
+	for(j in 0:5) {
+		try(test_model <- arima(procution_ts[700:750], order=c(i,0,j), include.mean=FALSE))
+		
+		# Save result of AIC to results matrix
+		tulosmatriisi[(i+1),(j+1)] <- test_model$aic
+		
+		if (test_model$aic <= min(tulosmatriisi)) {
+			bestmodel3 <- bestmodel2
+			bestmodel2 <- bestmodel1
+			bestmodel1 <- test_model
+		}
+		
+	}
+}
 
-# more testin
-bestmodel <- laskuM(procution_ts[400:800]); max(bestmodel)
+# Find outliers from residuals bestmodel1-bestmodel3 with TSA-packages functions
 
-# Find minimum from BIC_results
+# Create summary table
 
-# Minumum was found at k_min, j_min (was (1,0) with example data
-
-# Find outliers from residuals of ARIMA(k_min, 0, j_min) with TSA-packages functions
-
-# Output
+# Output possible outliers
 
 # Select data.frame to be sent to the output Dataset port
 #maml.mapOutputPort("ulos");
