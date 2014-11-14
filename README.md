@@ -14,8 +14,7 @@ General idea would be:
 
 4) Test BIC or AIC.
 
-5) Findl innovative and additive outliers for three best fitting models.
-
+5) Findl innovative and additive outliers from residuals of 1-3 ARIMA-models.
 
 Output1: Return Outliers of best ARIMA-model
 Output2: Return Outliers of 2nd best ARIMA-model
