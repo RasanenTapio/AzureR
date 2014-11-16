@@ -46,8 +46,8 @@ outlierA1 <- detectAO(bestmodel1)
 # Create summary tables
 # For innovative outliers:
 tableI1 <- data.frame(outlierI1$ind, aineisto[outlierI1$ind,1],aineisto[outlierI1$ind,2],  
-  aineisto[(outlierI1$ind),4], outlierI1$lambda1, "1st model")
-names(tableI1)<-c("OBS","Date","Value","LogDiff","Lambda1", "Model"); tableI1
+  aineisto[(outlierI1$ind),4], "IO", outlierI1$lambda1, "1st model")
+names(tableI1)<-c("OBS","Date","Value","LogDiff", "Type", "Lambda1", "Model"); tableI1
 
 # For additive outliers:
 
