@@ -25,7 +25,7 @@ bestmodel1 <- NA; bestmodel2 <- NA; bestmodel3 <- NA
 
 for(i in 0:5) {
 	for(j in 0:5) {
-		try(test_model <- arima(procution_ts[700:750], order=c(i,0,j), include.mean=FALSE))
+		try(test_model <- arima(procution_ts, order=c(i,0,j), include.mean=FALSE))
 		
 		# Save result of AIC to results matrix
 		tulosmatriisi[(i+1),(j+1)] <- test_model$aic
@@ -40,8 +40,16 @@ for(i in 0:5) {
 }
 
 # Find outliers from residuals bestmodel1-bestmodel3 with TSA-packages functions
+outlierI1 <- detectIO(bestmodel1)
+outlierA1 <- detectAO(bestmodel1)
 
-# Create summary table
+# Create summary tables
+# For innovative outliers:
+tableI1 <- data.frame(outlierI1$ind, aineisto[outlierI1$ind,1],aineisto[outlierI1$ind,2],  
+  aineisto[(outlierI1$ind),4], outlierI1$lambda1, "1st model")
+names(tableI1)<-c("OBS","Date","Value","LogDiff","Lambda1", "Model"); tableI1
+
+# For additive outliers:
 
 # Output possible outliers
 
