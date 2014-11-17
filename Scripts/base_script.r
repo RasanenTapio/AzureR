@@ -40,16 +40,23 @@ for(i in 0:5) {
 }
 
 # Find outliers from residuals bestmodel1-bestmodel3 with TSA-packages functions
-outlierI1 <- detectIO(bestmodel1)
+outlierI1 <- detectIO(bestmodel1) # loop this step from bestmodel1 to bestmodel2
 outlierA1 <- detectAO(bestmodel1)
 
 # Create summary tables
-# For innovative outliers:
+# For innovative outliers (Lambda1):
 tableI1 <- data.frame(outlierI1$ind, aineisto[outlierI1$ind,1],aineisto[outlierI1$ind,2],  
   aineisto[(outlierI1$ind),4], "IO", outlierI1$lambda1, "1st model")
 names(tableI1)<-c("OBS","Date","Value","LogDiff", "Type", "Lambda1", "Model"); tableI1
 
-# For additive outliers:
+# For additive outliers (Lambda2):
+tableA1 <- data.frame(outlierA1$ind, aineisto[outlierA1$ind,1], aineisto[outlierA1$ind, 2],  
+  aineisto[(outlierA1$ind),4], "AO", outlierA1$lambda2, "1st model")
+names(tableA1)<-c("OBS","Date","Value","LogDiff", "Type", "Lambda2", "Model"); tableA1
+
+# Merge by OBS
+
+# Find max(abs(<outliers>))
 
 # Output possible outliers
 
