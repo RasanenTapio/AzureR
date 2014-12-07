@@ -47,18 +47,23 @@ outlierA1 <- detectAO(bestmodel1)
 # For innovative outliers (Lambda1):
 tableI1 <- data.frame(outlierI1$ind, aineisto[outlierI1$ind,1],aineisto[outlierI1$ind,2],  
   aineisto[(outlierI1$ind),4], "IO", outlierI1$lambda1, "1st model")
-names(tableI1)<-c("OBS","Date","Value","LogDiff", "Type", "Lambda1", "Model"); tableI1
+names(tableI1)<-c("OBS","Date","Value","LogDiff", "Type", "Lambda", "Model"); tableI1
 
 # For additive outliers (Lambda2):
 tableA1 <- data.frame(outlierA1$ind, aineisto[outlierA1$ind,1], aineisto[outlierA1$ind, 2],  
   aineisto[(outlierA1$ind),4], "AO", outlierA1$lambda2, "1st model")
-names(tableA1)<-c("OBS","Date","Value","LogDiff", "Type", "Lambda2", "Model"); tableA1
+names(tableA1)<-c("OBS","Date","Value","LogDiff", "Type", "Lambda", "Model"); tableA1
 
-# Merge by OBS
+# Combine
+result <- rbind(tableI1, tableA1)
+result_obs <- result[order(result$OBS),] 
+
 
 # Find max(abs(<outliers>))
+result_likely <- result[order(-abs(result$Lambda)),] 
+result_likely[1,]
 
 # Output possible outliers
-
 # Select data.frame to be sent to the output Dataset port
-#maml.mapOutputPort("ulos");
+# maml.mapOutputPort("result_obs");
+# Also output a plot
