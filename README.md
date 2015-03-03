@@ -4,7 +4,7 @@ AzureR
 Experiment of R scripts for MS Azure Machine Learning studio and general R scripts and functions.
 
 ======
-Outlier detection (time series) 
+Outlier detection in time series
 
 1. Input: One dataset (time series).
 2. Pre-processing data (if not done)
@@ -13,10 +13,11 @@ Outlier detection (time series)
 6. Generate summary tables and output.
 7. Output: Output most likely outliers. (Score outliers according to three models and return most likely outliers.)
 
-Outlier detection with subsampling (Mahalanobis distance)
-1. Sample small number of rows from matrix (for example n = 3): X_i
+Outlier detection with subsampling and Mahalanobis distance
+
+1. Sample small number of rows from matrix (for example n = 3): X
 2. Calculate covariance matrix
 3. Calculate inverse of covariance matrix
-4. Calculate Mahalanobis distances for all observations to sample X_i
+4. Calculate Mahalanobis distances for all observations to sample X
 5. Select minimum distance
 6. Stantardize and z-test
